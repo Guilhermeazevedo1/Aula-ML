@@ -1,98 +1,84 @@
-# vinext-starter
+# Como uma máquina aprende?
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Projeto educacional para uma aula introdutória de Aprendizagem de Máquina. Ele combina uma apresentação web interativa com um Jupyter Notebook que reproduz, em Python e Scikit-learn, as ideias exploradas visualmente.
 
-## Prerequisites
+## O que a aula cobre
 
-- Node.js `>=22.13.0`
+- Aprendizado supervisionado, não supervisionado e por reforço
+- Regressão, classificação e o fluxo do Scikit-learn
+- Regressão Linear, KNN, Decision Tree, Random Forest e Naive Bayes
+- Accuracy, Precision, Recall, F1, matriz de confusão, MAE, MSE, RMSE e R²
+- Underfitting, overfitting e generalização
+- K-Means, DBSCAN e PCA
+- Redes neurais, Deep Learning e AutoML com FLAML
 
-## Quick Start
+O site foi pensado para apresentação ao vivo em projetor. Use as setas esquerda/direita ou `Page Up`/`Page Down` para mudar de capítulo, `Espaço` para avançar e `Esc` para abrir a visão geral.
+
+## Estrutura principal
+
+```text
+app/
+  components/                 demonstrações interativas por tema
+  globals.css                 tema, layout e responsividade
+  page.tsx                    narrativa dos 24 capítulos
+notebooks/
+  aprendizagem_de_maquina.ipynb
+public/notebooks/             cópia disponível para download no site
+scripts/
+  build-notebook.mjs          gera e sincroniza o notebook
+requirements.txt             dependências Python
+```
+
+## Executar o site
+
+Pré-requisito: Node.js 22.13 ou superior.
 
 ```bash
 npm install
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+Abra o endereço mostrado no terminal. O site não usa backend nem APIs externas essenciais e continua funcional sem internet depois que as dependências forem instaladas.
 
-## Included Shape
+Para validar a versão de produção:
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm test
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+## Executar o notebook
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+Pré-requisito: Python 3.10 ou superior.
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+No Windows PowerShell:
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+jupyter notebook
+```
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+Abra `notebooks/aprendizagem_de_maquina.ipynb`.
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+A seção de Deep Learning com Keras é opcional para evitar uma instalação pesada. Para executá-la:
 
-## Useful Commands
+```bash
+pip install tensorflow
+```
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+## Atualizar o notebook
 
-## Learn More
+O arquivo editável que define as células é `scripts/build-notebook.mjs`. Para regenerar a versão de trabalho e a cópia pública:
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+```bash
+npm run notebook:build
+```
+
+## Publicar no GitHub Pages
+
+O frontend usa Vite por meio do runtime atual do projeto. Para uma publicação futura no GitHub Pages, gere a pasta `dist` com `npm run build` e configure uma GitHub Action para enviar os arquivos estáticos compatíveis com o destino escolhido. Como esta versão também está preparada para Sites/Cloudflare Workers, preserve a configuração atual em uma branch separada caso adapte a saída para hospedagem estritamente estática.
+
+## Observação sobre AutoML
+
+Nesta aula foi escolhido o **FLAML** porque ele permite limitar explicitamente o tempo da busca e mantém a demonstração curta. AutoML automatiza testes de algoritmos e hiperparâmetros, mas não substitui decisões sobre dados, target, métricas, vazamento de dados, vieses e validade do resultado.

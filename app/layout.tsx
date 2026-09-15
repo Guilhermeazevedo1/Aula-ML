@@ -13,25 +13,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aprendizagem de Maquina | Aula Interativa",
+  title: "Como uma máquina aprende? | Aula interativa",
   description:
-    "Apresentacao didatica sobre machine learning, algoritmos do scikit-learn, AutoML, redes neurais e metricas.",
+    "Apresentação educacional interativa sobre aprendizagem de máquina, Scikit-learn, avaliação, clustering, redes neurais e AutoML.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
   openGraph: {
-    title: "Aprendizagem de Maquina | Aula Interativa",
+    title: "Como uma máquina aprende? | Aula interativa",
     description:
-      "Um site-aula com visualizacoes e notebook para ensinar tipos de ML, algoritmos e avaliacao.",
-    images: ["/og.png"],
+      "Uma experiência didática com 24 capítulos, simulações e notebook em Python.",
+    images: ["/og-v2.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aprendizagem de Maquina | Aula Interativa",
+    title: "Como uma máquina aprende? | Aula interativa",
     description:
-      "Explore aprendizado supervisionado, nao supervisionado, scikit-learn, AutoML e metricas.",
-    images: ["/og.png"],
+      "Explore algoritmos, métricas, clustering, redes neurais e AutoML com interações visuais.",
+    images: ["/og-v2.png"],
   },
 };
 
