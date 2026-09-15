@@ -5,6 +5,7 @@
   --ink-2: #151820;
   --paper: #f5f4ee;
   --paper-2: #ebe9df;
+  --neutral-band: #e5e9e8;
   --line-dark: #30343f;
   --line-light: #cbc9bf;
   --muted-dark: #a8adb8;
@@ -98,7 +99,7 @@ code { font-family: var(--font-geist-mono), Consolas, monospace; }
 .chapter-inner { align-items: center; display: grid; gap: 3.5rem; grid-template-columns: minmax(260px, .65fr) minmax(0, 1.55fr); margin: 0 auto; max-width: 1700px; min-height: calc(100vh - var(--header-height) - 4.5rem); }
 .tone-dark { background: var(--ink); color: var(--paper); }
 .tone-light { background: var(--paper); color: var(--ink); }
-.tone-accent { background: var(--yellow); color: var(--ink); }
+.tone-accent { background: var(--neutral-band); color: var(--ink); }
 .tone-dark + .tone-dark, .tone-light + .tone-light { border-top: 1px solid var(--line-dark); }
 .chapter-heading { align-self: start; display: grid; gap: 1rem; grid-template-columns: auto 1fr; padding-top: 1rem; }
 .chapter-number { color: currentColor; font-family: var(--font-geist-mono), monospace; font-size: .75rem; opacity: .55; padding-top: .35rem; }
