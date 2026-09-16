@@ -7,6 +7,9 @@ import { AccuracyTrap, ConfusionMatrixDemo, FitDemo, RegressionMetricsDemo, Thre
 import { ClusteringIntro, DbscanDemo, KMeansDemo, PcaDemo } from "./components/DiscoveryDemos";
 import { AutoMlDemo, ClosingSynthesis, DeepLearningDemo, NeuralNetworkDemo } from "./components/NeuralAutoMLDemos";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const notebookPath = `${basePath}/notebooks/aprendizagem_de_maquina.ipynb`;
+
 const chapters: Chapter[] = [
   { id: "capitulo-01", short: "Pergunta", title: "Como uma máquina aprende?" },
   { id: "capitulo-02", short: "3 formas", title: "Três formas de aprender" },
@@ -69,7 +72,7 @@ export default function Home() {
       <ChapterSection id="capitulo-20" number="20" eyebrow="DE UM CÁLCULO PARA UMA REDE" title="Pesos, soma, ativação e camadas." tone="light"><NeuralNetworkDemo /></ChapterSection>
       <ChapterSection id="capitulo-21" number="21" eyebrow="MAIS CAMADAS, NOVAS REPRESENTAÇÕES" title="O que muda quando a rede fica profunda?" tone="accent"><DeepLearningDemo /></ChapterSection>
       <ChapterSection id="capitulo-22" number="22" eyebrow="MUITOS MODELOS, UMA BUSCA" title="Qual algoritmo devemos escolher?" prompt="Deixe vários candidatos competir sob o mesmo tempo e a mesma métrica." tone="light"><AutoMlDemo /></ChapterSection>
-      <ChapterSection id="capitulo-23" number="23" eyebrow="UM MAPA, NÃO UMA RECEITA" title="Comece pelo tipo de pergunta." tone="dark" compact><ModelChooser /><AlgorithmCards /><div className="notebook-download"><div><span>AGORA, O CÓDIGO</span><strong>As mesmas ideias em poucas linhas de Python.</strong><p>17 seções com Scikit-learn, Keras opcional e AutoML com FLAML.</p></div><a className="primary-button" href="/notebooks/aprendizagem_de_maquina.ipynb" download>Baixar notebook</a></div></ChapterSection>
+      <ChapterSection id="capitulo-23" number="23" eyebrow="UM MAPA, NÃO UMA RECEITA" title="Comece pelo tipo de pergunta." tone="dark" compact><ModelChooser /><AlgorithmCards /><div className="notebook-download"><div><span>AGORA, O CÓDIGO</span><strong>As mesmas ideias em poucas linhas de Python.</strong><p>17 seções com Scikit-learn, Keras opcional e AutoML com FLAML.</p></div><a className="primary-button" href={notebookPath} download>Baixar notebook</a></div></ChapterSection>
       <ChapterSection id="capitulo-24" number="24" eyebrow="VOLTAMOS À PERGUNTA INICIAL" title="Se uma máquina pode aprender... como ela aprende?" tone="accent"><ClosingSynthesis /></ChapterSection>
     </PresentationShell>
   );

@@ -4,6 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 
 export type Chapter = { id: string; short: string; title: string };
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const notebookPath = `${basePath}/notebooks/aprendizagem_de_maquina.ipynb`;
+
 export function PresentationShell({ chapters, children }: { chapters: Chapter[]; children: React.ReactNode }) {
   const [current, setCurrent] = useState(0);
   const [overview, setOverview] = useState(false);
@@ -42,7 +45,7 @@ export function PresentationShell({ chapters, children }: { chapters: Chapter[];
       <header className="presentation-header">
         <button className="brand-button" type="button" onClick={() => goTo(0)} aria-label="Voltar ao início"><b>ML</b><span>Aprendizagem de Máquina</span></button>
         <div className="chapter-status"><span>{String(current + 1).padStart(2, "0")} / {chapters.length}</span><strong>{chapters[current]?.short}</strong></div>
-        <div className="header-actions"><a href="/notebooks/aprendizagem_de_maquina.ipynb" download>Notebook</a><button type="button" onClick={() => setOverview(true)}>Visão geral</button></div>
+        <div className="header-actions"><a href={notebookPath} download>Notebook</a><button type="button" onClick={() => setOverview(true)}>Visão geral</button></div>
         <div className="progress-track" aria-hidden="true"><i style={{ width: `${((current + 1) / chapters.length) * 100}%` }} /></div>
       </header>
 

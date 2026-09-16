@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:github": "next build",
     "start": "vinext start",
     "test": "npm run notebook:build && npm run build && node --test tests/rendered-html.test.mjs",
     "notebook:build": "node scripts/build-notebook.mjs",

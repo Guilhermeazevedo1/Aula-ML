@@ -18,6 +18,8 @@
   --violet: #a783ff;
   --green: #7ddc78;
   --header-height: 4.1rem;
+  --font-geist-sans: Arial, Helvetica, sans-serif;
+  --font-geist-mono: Consolas, "Liberation Mono", monospace;
 }
 
 @theme inline {
